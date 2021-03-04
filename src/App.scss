@@ -4,6 +4,13 @@
   transition: all 0.5s ease-in-out;
 }
 
+
+html, body {
+  overflow: hidden;
+  background-color: #282C34;
+  color: #fff;
+}
+
 .App {
   text-align: center;
 }
@@ -13,44 +20,26 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .card-container {
   max-width: 600px;
   max-height: 800px;
-  margin: 0 auto;
+  margin: 3rem auto;
 
-  box-shadow: 0 0 50px rgba($lightBlue, 0.5);
+  box-shadow: 0 0 30px rgba(#1111, 0.98);
 
   overflow: hidden;
+
+  border-radius: 5px;
 
   ul {
     overflow-y: auto;
@@ -142,7 +131,10 @@
 }
 
 .done-info {
-  font-size: 0.95rem;
+  padding: 1rem 0;
+  span {
+    font-size: 1.5rem;
+  }
 }
 
 

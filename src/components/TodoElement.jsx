@@ -1,4 +1,3 @@
-import { Tooltip } from "bootstrap"
 import React from "react"
 import { useDispatch } from "react-redux"
 import { REMOVE_TODO, DONE_TODO } from "../redux/types"
@@ -7,8 +6,7 @@ const TodoElement = ({text, elementId}) => {
 
     const dispatch = useDispatch()
 
-    const setAsDone =(k) => {
-
+    const setAsDone = (k) => {
         dispatch({
             type: DONE_TODO,
             todo: {
@@ -17,8 +15,7 @@ const TodoElement = ({text, elementId}) => {
         })
     }
 
-    const removeTodo =(k) => {
-
+    const removeTodo = (k) => {
         dispatch({
             type: REMOVE_TODO,
             todo: {

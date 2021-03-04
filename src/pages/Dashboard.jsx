@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import TodoElement from "../components/TodoElement"
 import { ADD_TODO } from "../redux/types"
@@ -28,13 +28,22 @@ export const Dashboard = () => {
         }
     }
 
-    return (
-        <div className="container">
-            
-            <div className="d-flex flex-row w-75 ml-5">
-                <span class="p-2 done-info">Done: {savedTodos.doneCounter}</span>
-            </div>
+    useEffect(() => {
+        document.getElementById('todo-input').onkeyup = function (e) {
+            if (e.key === 'Enter') {
+                createToDo()
+            }
+        }
+    })
 
+    return (
+        <div className="container animate__animated animate__zoomIn animate__duration-3s">
+            
+            <div className="card-container">
+                <div className="done-info text-center">
+                    <h2>{savedTodos.doneCounter} / {savedTodos.todos.length}</h2>
+                </div>
+            </div>
 
             <div className="card-container">
 
@@ -44,15 +53,16 @@ export const Dashboard = () => {
                 <div className="card-body">
                     <div className="input-container flex-row">
                         <input 
+                            id="todo-input"
                             type="text" 
                             className="form-control" 
-                            placeholder="Type what you want to do"
+                            placeholder="Type what you want to do and press enter"
                             value={currTodo} 
                             onChange={(e) => setToDo(e.target.value)} />
 
-                        <button 
+                        {/* <button 
                             className="btn btn-primary"
-                            onClick={() => createToDo()}>Create</button>
+                            onClick={() => createToDo()}>Create</button> */}
                     </div>
                     <ul>
                        { savedTodos ? savedTodos.todos.map(t => (

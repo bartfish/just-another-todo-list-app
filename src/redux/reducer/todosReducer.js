@@ -18,7 +18,7 @@ let doneCounter = (() => {
         return JSON.parse(cachedDoneCounter)
     }
 
-    return []
+    return 0
 })()
 
 const initialState = {
