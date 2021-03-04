@@ -1,5 +1,9 @@
 @import './theme/_variables';
 
+* {
+  transition: all 0.5s ease-in-out;
+}
+
 .App {
   text-align: center;
 }
@@ -46,9 +50,12 @@
 
   box-shadow: 0 0 50px rgba($lightBlue, 0.5);
 
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 
+  ul {
+    overflow-y: auto;
+    max-height: 500px;
+  }
   ul, li {
     list-style-type: none;
     margin: 1rem 0;
@@ -57,9 +64,11 @@
 
   li {
     border: 1px solid #222;
+    max-width: 98%;
   
     & > div {
       font-size: 0.85rem;
+
     }
   }
 }
@@ -71,21 +80,20 @@
     color: #fff;
     border: none;
     outline: none;
-
-    border-bottom: 1px solid $mateBlue;
     margin: 1rem 0;
 
     color: #fff;
-  
+    background-color: #222;
+
+    transition: all 0.5s ease-in-out;
     &:hover,
     &:active,
     &:focus {
-      background-color: #222;
+      background-color: #111;
       border: none;
       outline: none;
       box-shadow: none;
       color: #fff;
-
     }
 
   }
@@ -101,6 +109,55 @@
   }
 }
 
+.btn-link {
+  text-decoration: none;
+  border: none;
+  color: #eee;
+  // border: 1px solid #eee;
+  margin: 0 0.25rem;
+  font-size: 0.7rem;
+  
+  
+  &.done-btn {
+    background-color: rgba($lightBlue, 0.4);
+  }
+
+  &.remove-btn {
+    background-color: rgba($red, 0.4);
+  }
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+    text-decoration: none;
+
+    &.done-btn {
+      background-color: rgba($lightBlue, 1);
+    }
+  
+    &.remove-btn {
+      background-color: rgba($red, 1);
+    }
+
+  }
+}
+
 .done-info {
   font-size: 0.95rem;
+}
+
+
+
+// scrollbar
+
+ul::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+ul::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 15px rgba(#222, 0.5);
+}
+
+ul::-webkit-scrollbar-thumb {
+background-color: $mateBlue;
+outline: 1px solid $darkBlue;
 }

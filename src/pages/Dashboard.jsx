@@ -8,12 +8,12 @@ export const Dashboard = () => {
     const [currTodo, setToDo] = useState('')
 
     const dispatch = useDispatch()
-    const savedTodos = useSelector(state => state.todosReducer.todos)
+    const savedTodos = useSelector(state => state.todosReducer)
 
     const createToDo = () => {
         let generateId = 1;
-        if (savedTodos && savedTodos.length >= 1) {
-            generateId = savedTodos[savedTodos.length - 1].elementId + 1;
+        if (savedTodos && savedTodos.todos.length >= 1) {
+            generateId = savedTodos.todos[savedTodos.todos.length - 1].elementId + 1;
         }
         
         if (currTodo !== '') {
@@ -32,7 +32,7 @@ export const Dashboard = () => {
         <div className="container">
             
             <div className="d-flex flex-row w-75 ml-5">
-                <span class="p-2 done-info">Done: </span>
+                <span class="p-2 done-info">Done: {savedTodos.doneCounter}</span>
             </div>
 
 
@@ -46,6 +46,7 @@ export const Dashboard = () => {
                         <input 
                             type="text" 
                             className="form-control" 
+                            placeholder="Type what you want to do"
                             value={currTodo} 
                             onChange={(e) => setToDo(e.target.value)} />
 
@@ -54,7 +55,7 @@ export const Dashboard = () => {
                             onClick={() => createToDo()}>Create</button>
                     </div>
                     <ul>
-                       { savedTodos ? savedTodos.map(t => (
+                       { savedTodos ? savedTodos.todos.map(t => (
                             <li>
                                 <TodoElement text={t.text} elementId={t.elementId} />
                             </li>
