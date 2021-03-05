@@ -48,7 +48,7 @@ export const Dashboard = () => {
             <div className="card-container">
 
                 <div className="card-header">
-                    <h4>Just another to do list</h4>
+                    <h4>Just another ToDo list</h4>
                 </div>
                 <div className="card-body">
                     <div className="input-container flex-row">
@@ -59,10 +59,6 @@ export const Dashboard = () => {
                             placeholder="Type what you want to do and press enter"
                             value={currTodo} 
                             onChange={(e) => setToDo(e.target.value)} />
-
-                        {/* <button 
-                            className="btn btn-primary"
-                            onClick={() => createToDo()}>Create</button> */}
                     </div>
                     <ul>
                        { savedTodos ? savedTodos.todos.map(t => (
