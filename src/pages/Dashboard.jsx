@@ -89,7 +89,7 @@ export const Dashboard = () => {
                         { showType === TASK_STATUS.DONE ? 
                             savedTodos ? savedTodos.doneTodos.map(t => (
                             <li>
-                                <TodoElement text={t.text} />
+                                <TodoElement text={t.text} status={TASK_STATUS.DONE} />
                             </li>
                             ))
                             : null
@@ -99,7 +99,7 @@ export const Dashboard = () => {
                         { showType === TASK_STATUS.REMOVED ? 
                             savedTodos ? savedTodos.removedTodos.map(t => (
                             <li>
-                                <TodoElement text={t.text} />
+                                <TodoElement text={t.text} status={TASK_STATUS.REMOVED} />
                             </li>
                             ))
                             : null
@@ -109,7 +109,7 @@ export const Dashboard = () => {
                     </ul>
                 </div>
 
-                <div class="row">
+                <div className="row">
                     <button 
                         class={(showType === TASK_STATUS.TO_BE_DONE ? "active" : "") + " col-4 btn-tab tobedone"}
                         onClick={() => showToBeDone()}>

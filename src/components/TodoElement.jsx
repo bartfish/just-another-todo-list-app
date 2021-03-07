@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { REMOVE_TODO, DONE_TODO } from "../redux/types"
 
-const TodoElement = ({text, elementId}) => {
+const TodoElement = ({text, elementId, status}) => {
 
     const dispatch = useDispatch()
 
@@ -27,18 +27,21 @@ const TodoElement = ({text, elementId}) => {
     return (
         <div className="d-flex flex-row">
 
-        <div class="p-2">{ text }</div>
+        <div className="p-2">{ text }</div>
 
-        <div class="ml-auto p-2 actions">
-            <button 
-                onClick={() => setAsDone(elementId)} 
-                class="done-btn btn btn-link">
-                    Done</button>
-            <button 
-                onClick={() => removeTodo(elementId)} 
-                class=" remove-btn btn btn-link">
-                    Remove</button>
-        </div>
+        { status 
+            ? null : 
+            <div className="ml-auto p-2 actions">
+                <button 
+                    onClick={() => setAsDone(elementId)} 
+                    className="done-btn btn btn-link">
+                        Done</button>
+                <button 
+                    onClick={() => removeTodo(elementId)} 
+                    className=" remove-btn btn btn-link">
+                        Remove</button>
+            </div>
+        }
 
     </div>)
 
