@@ -1,4 +1,5 @@
 import { ADD_TODO, REMOVE_TODO, DONE_TODO } from "../types"
+import { TASK_STATUS } from "../../utils/constants"
 
 
 let todos = (() => {
@@ -67,7 +68,8 @@ export function todosReducer(state = initialState, action) {
     // eslint-disable-next-line default-case
     switch(action.type) {
         case ADD_TODO:  
-        
+
+            action.todo.status = TASK_STATUS.TO_BE_DONE
             todos.push(action.todo)
             localStorage.setItem('todos', JSON.stringify(todos));
             allCounter++
@@ -81,8 +83,11 @@ export function todosReducer(state = initialState, action) {
         case DONE_TODO:  
             
             // add to done list
-            let doneTodo = todos.filter(t => t.elementId === action.todo.elementId)
-            if (doneTodo) doneTodos.push(doneTodo)
+            let doneTodo = todos.filter(t => t.elementId === action.todo.elementId)[0]
+            if (doneTodo) {
+                doneTodo.status = TASK_STATUS.DONE
+                doneTodos.push(doneTodo)
+            }
             localStorage.setItem('doneTodos', JSON.stringify(doneTodos));
 
             // remove from to do list
@@ -99,8 +104,11 @@ export function todosReducer(state = initialState, action) {
         case REMOVE_TODO:  
 
             // add to done list
-            let rmTodo = todos.filter(t => t.elementId === action.todo.elementId)
-            if (rmTodo) removedTodos.push(rmTodo)
+            let rmTodo = todos.filter(t => t.elementId === action.todo.elementId)[0]
+            if (rmTodo) {
+                rmTodo.status = TASK_STATUS.REMOVED
+                removedTodos.push(rmTodo)
+            }
             localStorage.setItem('removedTodos', JSON.stringify(removedTodos));
 
             todos = todos.filter(t => t.elementId !== action.todo.elementId)
