@@ -9,6 +9,29 @@ let todos = (() => {
     }
 
     return []
+
+})()
+
+let doneTodos = (() => {
+
+    const cachedTodos = localStorage.getItem('doneTodos')
+    if (cachedTodos) {
+        return JSON.parse(cachedTodos)
+    }
+
+    return []
+    
+})()
+
+let removedTodos = (() => {
+
+    const cachedTodos = localStorage.getItem('removedTodos')
+    if (cachedTodos) {
+        return JSON.parse(cachedTodos)
+    }
+
+    return []
+    
 })()
 
 let doneCounter = (() => {
@@ -34,7 +57,9 @@ let allCounter = (() => {
 const initialState = {
     todos: todos,
     doneCounter: doneCounter,
-    allCounter: allCounter
+    allCounter: allCounter,
+    doneTodos: doneTodos,
+    removedTodos: removedTodos
 }
 
 export function todosReducer(state = initialState, action) {
@@ -54,7 +79,13 @@ export function todosReducer(state = initialState, action) {
             }
 
         case DONE_TODO:  
+            
+            // add to done list
+            let doneTodo = todos.filter(t => t.elementId === action.todo.elementId)
+            if (doneTodo) doneTodos.push(doneTodo)
+            localStorage.setItem('doneTodos', JSON.stringify(doneTodos));
 
+            // remove from to do list
             todos = todos.filter(t => t.elementId !== action.todo.elementId)
             localStorage.setItem('todos', JSON.stringify(todos));
             doneCounter++;
@@ -66,6 +97,11 @@ export function todosReducer(state = initialState, action) {
             }
 
         case REMOVE_TODO:  
+
+            // add to done list
+            let rmTodo = todos.filter(t => t.elementId === action.todo.elementId)
+            if (rmTodo) removedTodos.push(rmTodo)
+            localStorage.setItem('removedTodos', JSON.stringify(removedTodos));
 
             todos = todos.filter(t => t.elementId !== action.todo.elementId)
             localStorage.setItem('todos', JSON.stringify(todos));
