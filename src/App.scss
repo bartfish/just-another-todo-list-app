@@ -43,7 +43,7 @@ html, body {
 
   ul {
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 300px;
   }
   ul, li {
     list-style-type: none;
@@ -153,3 +153,34 @@ ul::-webkit-scrollbar-thumb {
 background-color: $mateBlue;
 outline: 1px solid $darkBlue;
 }
+
+
+.btn-tab {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 1rem 0;
+
+  &.tobedone {
+    background-color: transparent;
+  }
+
+  &.removed {
+    background-color: rgba($red, 0.4);
+
+    &:hover, &.active {
+      background-color: rgba($red, 1);
+    }
+    
+  }
+
+  &.done {
+    background-color: rgba($lightBlue, 0.4);
+
+    &:hover, &.active {
+      background-color: rgba($lightBlue, 1);
+    }
+
+  }
+} 

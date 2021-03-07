@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import TodoElement from "../components/TodoElement"
 import { ADD_TODO } from "../redux/types"
+import { TASK_STATUS } from "../utils/constants"
 
 export const Dashboard = () => {
 
     const [currTodo, setToDo] = useState('')
+    const [showType, setShowType] = useState(TASK_STATUS.TO_BE_DONE)
 
     const dispatch = useDispatch()
     const savedTodos = useSelector(state => state.todosReducer)
@@ -36,13 +38,24 @@ export const Dashboard = () => {
         }
     })
 
+    const showToBeDone = () => {
+        setShowType(TASK_STATUS.TO_BE_DONE)
+    }
+
+    const showDone = () => {
+        setShowType(TASK_STATUS.DONE)
+    }
+
+    const showRemoved = () => {
+        setShowType(TASK_STATUS.REMOVED)
+    }
+
     return (
         <div className="container animate__animated animate__zoomIn animate__duration-3s">
             
             <div className="card-container">
                 <div className="done-info text-center">
                     <h2>{savedTodos.doneCounter} / {savedTodos.allCounter}</h2>
-                    <h2>{savedTodos.doneTodos.length} / {savedTodos.removedTodos.length}</h2>
                 </div>
             </div>
 
@@ -62,12 +75,58 @@ export const Dashboard = () => {
                             onChange={(e) => setToDo(e.target.value)} />
                     </div>
                     <ul>
-                       { savedTodos ? savedTodos.todos.map(t => (
+                    
+                       { showType === TASK_STATUS.TO_BE_DONE ? 
+                            savedTodos ? savedTodos.todos.map(t => (
                             <li>
                                 <TodoElement text={t.text} elementId={t.elementId} />
                             </li>
-                       )) : null}
+                            ))
+                            : null
+                            : null
+                        }
+
+                        { showType === TASK_STATUS.DONE ? 
+                            savedTodos ? savedTodos.doneTodos.map(t => (
+                            <li>
+                                <TodoElement text={t.text} />
+                            </li>
+                            ))
+                            : null
+                            : null
+                        }
+
+                        { showType === TASK_STATUS.REMOVED ? 
+                            savedTodos ? savedTodos.removedTodos.map(t => (
+                            <li>
+                                <TodoElement text={t.text} />
+                            </li>
+                            ))
+                            : null
+                            : null
+                        }
+
                     </ul>
+                </div>
+
+                <div class="row">
+                    <button 
+                        class={(showType === TASK_STATUS.TO_BE_DONE ? "active" : "") + " col-4 btn-tab tobedone"}
+                        onClick={() => showToBeDone()}>
+                            To be done ({savedTodos.todos.length})
+                    </button>
+
+                    <button 
+                        class={(showType === TASK_STATUS.DONE ? "active" : "") + " col-4 btn-tab done"}
+                        onClick={() => showDone()}>
+                            Done ({savedTodos.doneTodos.length})
+                    </button>
+
+                    <button 
+                        class={(showType === TASK_STATUS.REMOVED ? "active" : "") + " col-4 btn-tab removed"}
+                        onClick={() => showRemoved()}>
+                            Removed ({savedTodos.removedTodos.length})
+                    </button>
                 </div>
 
             </div>
