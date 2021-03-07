@@ -41,7 +41,7 @@ export const Dashboard = () => {
             
             <div className="card-container">
                 <div className="done-info text-center">
-                    <h2>{savedTodos.doneCounter} / {savedTodos.todos.length}</h2>
+                    <h2>{savedTodos.doneCounter} / {savedTodos.allCounter}</h2>
                 </div>
             </div>
 

@@ -21,9 +21,20 @@ let doneCounter = (() => {
     return 0
 })()
 
+let allCounter = (() => {
+
+    const cachedAllCounter = localStorage.getItem('allCounter')
+    if (cachedAllCounter) {
+        return JSON.parse(cachedAllCounter)
+    }
+
+    return 0
+})()
+
 const initialState = {
     todos: todos,
-    doneCounter: doneCounter
+    doneCounter: doneCounter,
+    allCounter: allCounter
 }
 
 export function todosReducer(state = initialState, action) {
@@ -34,18 +45,20 @@ export function todosReducer(state = initialState, action) {
         
             todos.push(action.todo)
             localStorage.setItem('todos', JSON.stringify(todos));
+            allCounter++
 
             return {
                 ...state,
-                todos: todos
+                todos: todos,
+                allCounter: allCounter
             }
 
         case DONE_TODO:  
 
             todos = todos.filter(t => t.elementId !== action.todo.elementId)
             localStorage.setItem('todos', JSON.stringify(todos));
-
             doneCounter++;
+
             return {
                 ...state,
                 todos: todos,
@@ -56,9 +69,12 @@ export function todosReducer(state = initialState, action) {
 
             todos = todos.filter(t => t.elementId !== action.todo.elementId)
             localStorage.setItem('todos', JSON.stringify(todos));
+
+            allCounter = allCounter > 1 ? allCounter - 1 : 0;
             return {
                 ...state,
-                todos: todos
+                todos: todos,
+                allCounter: allCounter
             }
 
         default: 
