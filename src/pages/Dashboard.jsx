@@ -52,12 +52,6 @@ export const Dashboard = () => {
 
     return (
         <div className="container animate__animated animate__zoomIn animate__duration-3s">
-            
-            <div className="card-container">
-                <div className="done-info text-center">
-                    <h2>{savedTodos.doneTodos.length} / {savedTodos.allCounter}</h2>
-                </div>
-            </div>
 
             <div className="card-container">
 
