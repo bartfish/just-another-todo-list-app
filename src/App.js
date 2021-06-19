@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Dashboard } from "./pages/Dashboard"
 
 function App() {
+  console.log("Welcome!!!")
   return (
     <div className="App">
           <BrowserRouter>
